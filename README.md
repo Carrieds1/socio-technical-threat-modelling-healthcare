@@ -288,8 +288,9 @@ This project does not attribute fault to individuals and recognises real-world c
 
 This project is part of a broader exploration of safety, risk, and decision-making under uncertainty:
 
-- ../mental-health-safety-framework - applying threat modelling concepts to human behaviour and escalation  
-- ../clinical-iv-dosing-calculator - reducing risk in clinical workflows through structured validation  
+
+- [Mental Health Safety Framework](https://github.com/carrieds1/mental-health-safety-framework) - applying threat modelling concepts to human behaviour and escalation  
+- [Clinical IV Dosing Calculator](https://github.com/carrieds1/clinical-iv-dosing-calculator) - reducing risk in clinical workflows through structured validation  
 
 Together, these projects demonstrate an approach that integrates technical risk analysis with real-world human factors.
 
