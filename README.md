@@ -4,23 +4,27 @@ A case study in applying cybersecurity thinking to a real-world healthcare syste
 
 ## Overview
 
-This project applies cybersecurity concepts to a healthcare system (NSW “Between the Flags”) to model how human factors, system design, and operational pressures create risk.
+This project applies cybersecurity principles to a socio-technical healthcare system (NSW Between the Flags) to model how human factors, system design, and operational pressures create risk.
 
-The Between the Flags system was selected as it is specifically designed to detect early and late clinical deterioration through structured vital sign monitoring and escalation thresholds, making it well suited to modelling detection and response mechanisms in cybersecurity.
+The Between the Flags (BTF) system is designed to detect clinical deterioration using structured vital sign monitoring and escalation thresholds. This makes it well-suited to modelling:
 
-It demonstrates how:
+- Detection systems
+- Threshold-based alerting
+- Escalation and response mechanisms
+
+This work reframes healthcare safety through a cybersecurity lens, demonstrating that:
 
 - Threat modelling extends beyond technical systems
-- Human behaviour forms part of the attack surface
-- Data accuracy and interpretation directly impact outcomes
+- Human behaviour is part of the attack surface
+- Data integrity and interpretation directly influence outcomes
 
-This work draws on prior clinical experience to map newly learned cybersecurity concepts to a real-world system, and is adapted from a Foundations of Cyber Security (COMP1337) project.
+This work is informed by prior clinical experience, grounding the analysis in real-world system behaviour alongside theoretical modelling. It originated from a COMP1337 Foundations of Cyber Security assessment (poster component) and was extended to explore real-world system behaviour in greater depth.
 
 ---
 
 ## Poster
 
-The full visual model of this analysis can be viewed below
+The full visual model of this analysis is available below:
 
 [View Poster (PDF)](poster.pdf)
 
@@ -33,39 +37,76 @@ The Between the Flags system is used in NSW hospitals to monitor patient vital s
 - **Yellow zones** -> early deterioration
 - **Red zones** -> urgent deterioration
 
-These act similarly to:
+These functions are analogous to:
 
-- Detection systems
-- Threshold-based alerting
-- Escalation mechanisms
+- Intrusion detection systems
+- Threshold-based alerting mechanisms
+- Incident escalation workflows
+
+---
+
+## Threat Modelling
+
+### Assets
+
+- Patient physiological stability
+- Clinical decision accuracy
+- Timely escalation and intervention
+- Integrity of clinical documentation
+
+---
+
+### Adversaries
+
+- Primary: Biological processes (disease, injury)
+- Secondary: Human operators under cognitive and workload constraints
+- Contributing: System design limitations
+
+This system defends against **stochastic, time-evolving adversarial processes** rather than intelligent attackers. Unlike traditional cybersecurity systems, the “adversary” here is non-intentional, meaning system resilience depends on managing uncertainty, variability, and human limitations rather than preventing deliberate exploitation.
+
+---
+
+### Attack Surface
+
+- Manual vital sign measurement and entry
+- Documentation workflows
+- Threshold-based decision systems
+- Clinical handover and communication pathways
+
+---
+
+### Trust Boundaries
+
+- Observation -> Documentation
+- Documentation -> Interpretation
+- Interpretation -> Escalation
+
+---
+
+### Failure Modes
+
+- Data integrity degradation (inaccurate observations)
+- Signal loss (missing or unrecorded data)
+- Misclassification (false negatives / false positives)
+- Delayed or missed escalation
+- Incomplete situational awareness
+
+Failures commonly occur at these boundaries due to **loss of fidelity or misinterpretation**.
 
 ---
 
 ## Core Security Concepts
 
-### Threat Modelling
-
-- **Asset:** Patient safety and clinical outcomes
-- **Adversaries:**
-  - Disease / injury
-  - Human error under workload and cognitive pressure
-- **Risks:**
-  - Delayed detection
-  - Clinical deterioration
-  - Complications and mortality
-
----
-
 ### CIA Triad (Applied)
 
 - **Confidentiality:**  
-  Access and visibility of patient data and practitioner actions
+  Controlled access to patient data and clinical actions
 
 - **Integrity:**  
-  Accuracy of clinical documentation and recorded observations
+  Accuracy and reliability of recorded observations
 
 - **Availability:**  
-  Access to timely, accurate, and usable patient information
+  Timely access to usable, relevant clinical information
 
 ---
 
@@ -73,26 +114,48 @@ These act similarly to:
 
 Clinical documentation systems assume that:
 
-- Recorded observations were actually performed
-- Signatures represent completed work
+- Observations were performed as recorded
+- Signatures represent completed actions
 
-However, this introduces a limitation where:
+However:
 
-- Recorded data cannot always be independently verified as accurate or reflective of performed actions
+- Observations are not always independently verifiable
+- Recorded values may not fully reflect real conditions
 
-This reflects a real-world **authentication and non-repudiation challenge** in human-driven systems.
+This represents a **real-world authentication and non-repudiation limitation** in human-driven systems.
 
 ---
 
-## Human-Layer Vulnerabilities
+### Preventative Controls
+
+- Standardised observation protocols
+- Structured documentation systems
+
+---
+
+### Detective Controls
+
+- Yellow/Red zone thresholds
+- Pattern-based identification of deterioration
+
+---
+
+### Responsive Controls
+
+- Escalation protocols
+- Rapid response teams
+
+---
+
+### Human-Layer Vulnerabilities
 
 This project focuses on **non-malicious insider risk**, including:
 
-- Cognitive biases in decision-making
+- Cognitive bias under uncertainty
 - Prioritisation under workload pressure
 - Over-reliance on protocols or automated systems
-- Manual data capture gaps (side channels)
 - Reduced situational awareness under cognitive load
+- Manual data capture gaps (side channels)
 
 ---
 
@@ -100,66 +163,87 @@ This project focuses on **non-malicious insider risk**, including:
 
 The following scenarios are **theoretical models used for system-level analysis**:
 
-1. **Missing Side-Channel Information**  
-   Critical observations (e.g. respiratory rate) are not reliably captured due to manual dependency
+1. **Missing Side-Channel Information**
+2. **Documentation Integrity Degradation**
+3. **Protocol Over-Reliance**
+4. **Delayed or Missed Escalation**
+5. **Failed Compensation Detection**
 
-2. **Documentation Integrity Degradation**  
-   Recorded data may not fully reflect real observations under operational pressure
+---
 
-3. **Protocol Over-Reliance**  
-   Decisions are made based on thresholds without sufficient clinical context
+## Failure Chain Example (Attack Path Analogy)
 
-4. **Delayed or Missed Escalation**  
-   Deterioration is present but escalation is delayed or not initiated
+- Respiratory rate not measured (side-channel loss)
+- Observation recorded as normal (integrity failure)
+- No Yellow Zone trigger (detection failure)
+- No escalation initiated (response failure)
+- Condition deteriorates unnoticed
+- Late intervention required (high-impact outcome)
 
-5. **Failed Compensation Detection**  
-   Interdependent physiological signals are not interpreted holistically
+This parallels a **cybersecurity attack chain**, where small, individually non-critical failures compound into a high-impact outcome.
+
+---
+
+## Risk Framing
+
+Risk emerges from the interaction between likelihood and impact.
+
+Likelihood increases under:
+
+- High patient-to-staff ratios
+- Frequent interruptions
+- Time pressure and workload
+- Handover transitions
+
+Impact includes:
+
+- Delayed detection significantly increases risk of complications and mortality
 
 ---
 
 ## Additional Security Concepts Demonstrated
 
-This project integrates multiple foundational cybersecurity concepts into a single applied model:
-
-- Human error and cognitive vulnerabilities
-- Side channels (missing or unrecorded information)
+- Side channels (missing or unrecorded signals)
 - Type 1 vs Type 2 errors (false positives / false negatives)
-- Defence in depth (systems, procedures, and documentation)
-- Risk modelling (likelihood vs impact)
+- Defence in depth (systems + processes + human judgement + education + culture)
 - Insider risk (non-malicious actors under pressure)
+- Socio-technical system failures
 
-This reflects a holistic application of foundational cybersecurity principles within a real-world system.
+---
+
+## Mitigations (Security-Framed Controls)
+
+**Reduce side-channel loss:**
+
+- Automate high-risk data capture where possible
+
+Improve detection quality:
+
+- Context-aware decision support systems
+
+**Mitigate cognitive failure**:
+
+- Training in pattern recognition and escalation triggers
+
+**Increase data integrity**:
+
+- Verifiable logging and auditability of observations
+
+**Add redundancy**:
+
+- Incorporate patient-reported signals as external validation
 
 ---
 
 ## Key Insight
 
-Human behaviour is a major source of risk in complex systems.
-
-Failures often emerge from the interaction between:
+Failures in complex systems emerge from interactions between:
 
 - People (cognition, bias, workload)
 - Processes (protocols and escalation rules)
 - Systems (data capture and monitoring design)
 
-rather than from isolated technical weaknesses.
-
----
-
-## Mitigations (High-Level Controls)
-
-- Reduce reliance on manual data capture where possible
-- Improve context-aware decision support systems
-- Enhance training in pattern recognition and escalation
-- Increase reliability and auditability of critical observations
-- Encourage active participation from system users (patients)
-
----
-
-## Disclaimer
-
-All scenarios are theoretical models designed to analyse system-level behaviour.  
-This project does not attribute intent or blame to individuals and recognises real-world constraints such as workload, system complexity, and operational pressures.
+Rather than from isolated technical weaknesses.
 
 ---
 
@@ -168,13 +252,32 @@ This project does not attribute intent or blame to individuals and recognises re
 This project demonstrates that:
 
 - Security is not purely technical
-- Human cognition is a critical component of system reliability
-- Failures emerge from complex interactions between people and systems
+- Human cognition is a critical system dependency
+- Risk emerges from socio-technical interactions
 
-This approach is applicable to:
+These principles apply broadly to:
 
 - Healthcare systems
 - Financial systems
-- Any safety-critical or human-driven environment
+- Critical infrastructure
+- Any human-driven, high-reliability environment
+
+---
+
+## Limitations
+
+- This model is conceptual and not based on formally collected hospital datasets
+- It is informed by prior clinical experience rather than controlled study conditions
+- Assumes typical operational environments rather than rare or extreme scenarios
+- Does not model organisational or policy-level constraints in detail
+
+Despite these limitations, the model reflects practical clinical realities and observed system behaviours, providing a structured way to analyse how human factors and system design interact to produce risk.
+
+---
+
+## Disclaimer
+
+All scenarios are theoretical system-level models.
+This project does not attribute fault to individuals and recognises real-world constraints including workload, system limitations, and operational complexity.
 
 > Security in real-world systems is as much about people as it is about technology.
