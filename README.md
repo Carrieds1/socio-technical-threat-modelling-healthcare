@@ -281,3 +281,15 @@ All scenarios are theoretical system-level models.
 This project does not attribute fault to individuals and recognises real-world constraints including workload, system limitations, and operational complexity.
 
 > Security in real-world systems is as much about people as it is about technology.
+
+
+
+## Related Work
+
+This project is part of a broader exploration of safety, risk, and decision-making under uncertainty:
+
+- ../mental-health-safety-framework - applying threat modelling concepts to human behaviour and escalation  
+- ../clinical-iv-dosing-calculator - reducing risk in clinical workflows through structured validation  
+
+Together, these projects demonstrate an approach that integrates technical risk analysis with real-world human factors.
+
